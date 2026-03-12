@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+{% block title %}
+プロフィール
+{% endblock %}
+
+{% block body %}
+<h1>プロフィール</h1>
+<main>
+    <ul>
+        <li><a href="{{ url_for('profile.achievement') }}">実績</a></li>
+        <li><a href="{{ url_for('profile.shop') }}">ショップ</a></li>
+    </ul>
+</main> 
+<h2>ユーザー情報</h2>
+<section class="my_card_display margin">
+    <canvas id="my_card" width="627" height="379" style="background-color: #ffffff;">
+        <h3>{{ user }}のカード</h3>
+    </canvas>
+
+    <div class="my_card_edit">
+        <form action="{{ url_for('profile.edit') }}" method="post">
+            <label> 称号:
+                <select id="title1_select" name="title1" required>
+                    {% for has_title in has_regular_titles %}
+                    <option value="{{ has_title.id }}" {% if has_title.id==cur_title.t1 %} selected {% endif %}>{{
+                        has_title.content }}</option>
+                    {% endfor %}
+                </select>
+                <select id="join_title_select" name="join_title" required>
+                    {% for has_title in has_join_titles %}
+                    <option value="{{ has_title.id }}" {% if has_title.id==cur_title.tjoin %} selected {% endif %}>{{
+                        has_title.content }}</option>
+                    {% endfor %}
+                </select>
+                <select id="title2_select" name="title2" required>
+                    {% for has_title in has_regular_titles %}
+                    <option value="{{ has_title.id }}" {% if has_title.id==cur_title.t2 %} selected {% endif %}>{{
+                        has_title.content }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <div class="user_name_input"><label for="user_name"> ユーザー名: </label><input id="user_name" type="text" id="name" name="name" value="{{ user }}" placeholder="ユーザー名を入力"></div>
+            <input type="hidden" id="bg_id" name="bg_pattern" value="{{ card.bg_pattern }}"><!-- 背景パターンの値を取る用のフォーム -->
+            <label>背景パターン:
+                <select id="bg_pattern">
+                    <optgroup label="単色">
+                        <option value="bg_mono" data-pattern="0">単色</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="グラデーション">
+                        <option value="bg_gra1" data-pattern="1">グラデーション（縦）</option>
+                        <option value="bg_gra2" data-pattern="2">グラデーション（横）</option>
+                        <option value="bg_gra3" data-pattern="3">グラデーション（斜め１）</option>
+                        <option value="bg_gra4" data-pattern="4">グラデーション（斜め２）</option>
+                        <option value="bg_gra5" data-pattern="5">放射状グラデーション</option>
+                        <option value="bg_gra6" data-pattern="6">扇状グラデーション</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="縞模様">
+                        <option value="bg_shima1" data-pattern="21">横縞</option>
+                        <option value="bg_shima2" data-pattern="22">縦縞</option>
+                        <option value="bg_shima3" data-pattern="23">横縞（斜め１）</option>
+                        <option value="bg_shima4" data-pattern="24">横縞（斜め２）</option>
+                        <option value="bg_shima5" data-pattern="25">縦縞（斜め１）</option>
+                        <option value="bg_shima6" data-pattern="26">縦縞（斜め２）</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="チェック">
+                        <option value="bg_koushi" data-pattern="41">格子</option>
+                        <option value="bg_ichimatsu" data-pattern="42">市松格子</option>
+                        <option value="bg_benkei" data-pattern="43">弁慶縞</option>
+                        <option value="bg_miso" data-pattern="44">味噌漉格子</option>
+                        <option value="bg_aziro" data-pattern="45">網代組み・三崩し</option>
+                        <option value="bg_yosuzi" data-pattern="46">四筋格子</option>
+                        <option value="bg_hutasuzi" data-pattern="49">二筋格子</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="菱形">
+                        <option value="bg_hishi" data-pattern="61">菱形</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="柄">
+                        <option value="bg_dot" data-pattern="81">ドット</option>
+                    </optgroup>
+                    <hr />
+                </select>
+            </label>
+            <div class="my_card_edit_color">
+                <label>背景色1: <input type="color" value="{{ card.bg1_color }}" id="color_picker_bg1" name="color_picker_bg1" /></label>
+                <label>背景色2: <input type="color" value="{{ card.bg2_color }}" id="color_picker_bg2" name="color_picker_bg2"/></label>
+                <label>名前の色: <input type="color" value="{{ card.name_color }}" id="color_picker_name" name="color_picker_name"/></label>
+                <label>その他の色: <input type="color" value="{{ card.other_color }}" id="color_picker_other" name="color_picker_other"/></label>
+            </div>
+
+    </div>
+</section>
+<section class="my_card_buttons">
+    <button id="profile_save_button" type="submit" class="common_button">プロフィールを保存</button>
+    </form>
+    <a id="download_button" download="my-card.png" class="common_button" onclick="mycard_download(event)">画像として保存</a>
+    <!-- <p><button>共有する（webshareAPIでできるものの、firefoxには非対応）</button></p> -->
+</section>
+
+
+<!--
+<h2>所持している称号一覧</h2>
+<ul class="has_title_list">
+    {% for has_title in items %}
+    <li class="has_title_child">{{ has_title.content }}</li>
+    {% endfor %}
+</ul>
+-->
+<script> let achievement_data = {{ user_achievement | tojson }}</script>
+<script src="{{ url_for('static', filename='my-card.js') }}"></script>
+{% endblock %}

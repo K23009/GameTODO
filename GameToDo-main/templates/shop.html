@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block title %}
+ショップ
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+    <h1>ショップ</h1>
+    <h3>現在の所持ポイント</h3>
+    <div class="lined_margin margin"><span id="point"></span>ポイント</div>
+
+    <section id="shop_display">
+        <!-- ここに称号が並ぶ。 -->
+        <details open>
+            <summary>通常の称号</summary>
+            <div id="shop_display_regular">
+            {% for goods in items %}
+                {% if goods.id <= 900 %}
+                    {% if goods.have_this %}
+                        <a class="shop_goods shop_sold" data-cost="{{ goods.cost }}" data-id="{{ goods.id }}">
+                            <div class="shop_goods_title">{{ goods.content }}</div>
+                            <div class="shop_goods_cost">{{ goods.cost }} ポイント</div>
+                            <div class="shop_buy_button">購入済み</div>
+                        </a>
+                    {% else %}
+                        <a class="shop_goods" onclick="buy(event)" data-cost="{{ goods.cost }}" data-id="{{ goods.id }}">
+                            <div class="shop_goods_title">{{ goods.content }}</div>
+                            <div class="shop_goods_cost">{{ goods.cost }} ポイント</div>
+                            <div class="shop_buy_button">購入</div>
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+        </details>
+        <details open>
+            <summary>接続用の称号</summary>
+            <div id="shop_display_join">
+                {% for goods in items %}
+                    {% if goods.id > 900 %}
+                        {% if goods.have_this %}
+                            <a class="shop_goods shop_sold" data-cost="{{ goods.cost }}" data-id="{{ goods.id }}">
+                                <div class="shop_goods_title">{{ goods.content }}</div>
+                                <div class="shop_goods_cost">{{ goods.cost }} ポイント</div>
+                                <div class="shop_buy_button">購入済み</div>
+                            </a>
+                        {% else %}
+                            <a class="shop_goods" onclick="buy(event)" data-cost="{{ goods.cost }}" data-id="{{ goods.id }}">
+                                <div class="shop_goods_title">{{ goods.content }}</div>
+                                <div class="shop_goods_cost">{{ goods.cost }} ポイント</div>
+                                <div class="shop_buy_button">購入</div>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </details>
+    </section>
+    <script>
+        let point = parseInt({{ point | tojson}})
+        document.getElementById("point").innerHTML = point;
+
+        function buy(event) {
+            // datasetは、data-xxxで指定されたオブジェクトになる
+            // {index:1}
+            const buy_target = event.currentTarget;
+            var data = buy_target.dataset['cost'];
+            if (point - parseInt(data) >= 0) {
+                point -= parseInt(data);
+
+                
+                buy_target.classList.add("shop_sold");
+                buy_target.removeAttribute("onclick");
+                buy_target.getElementsByClassName('shop_buy_button')[0].innerHTML = "購入済み";
+
+                let buy_title_id = new XMLHttpRequest();
+                buy_title_id.open('POST', 'buy_title');
+                buy_title_id.setRequestHeader('content-type', 'application/json');
+                buy_title_id.send(parseInt(buy_target.dataset['id']));
+            }
+            else {
+                alert("ポイントが足りません！");
+            }
+            document.getElementById("point").innerHTML = point;
+
+            // Fetch.APIの方がいいかもしれない。
+            let request = new XMLHttpRequest();
+            request.open('POST', 'send_data_to_flask');
+            request.setRequestHeader('content-type', 'application/json');
+            request.send(point);
+        }
+    </script>
+{% endblock %}

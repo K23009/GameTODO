@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}
+タスク追加
+{% endblock %}
+
+{% block body %}
+    <h1>HOME</h1>
+    <main>
+        
+        <h2>ユーザー情報</h2>
+        <div class="lined_margin">ユーザー名: {{ user }}</div>
+        <h2>現在の所持ポイント</h2>
+        <div class="lined_margin">{{ point }}ポイント</div>
+        <h2>最も優先すべきタスク</h2>
+        <div class="lined_margin">
+        {% if nearest_task == none %}
+        {% if expired_count == 0 %}
+        <p>タスクは全て完了しています</p>
+        <p>素晴らしい！！</p>
+        {% endif %}
+        {% else %}
+        <p>タスク名: {{ nearest_task.name }}</p>
+        <p>期限: {{ nearest_task.limit}}</p>
+        {% endif %}
+        {% if expired_count > 0 %}
+        <p class="expired">期限切れのタスクが{{ expired_count }}個あります</p>
+        {% endif %}
+        </div>
+    </main> 
+    </form>
+{% endblock %}

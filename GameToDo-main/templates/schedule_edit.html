@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}
+時間割編集
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='schedule-style.css') }}">
+{% endblock %}
+{% block body %}
+	<h1>時間割編集</h1>
+    <form action=" {{url_for('schedule.edit', schedule_id=schedule.id) }}" method="post">
+        {% if schedule.is_recorded %}
+        <div class="margin"><label>科目名<input class="input-text" type="text" name="kamoku" value="{{schedule.kamoku}}" required placeholder="科目名"></label></div>
+        {% else %}
+        <div class="margin"><label>科目名<input class="input-text" type="text" name="kamoku" value="" required placeholder="科目名"></label></div>
+        {% endif %}
+        <div class="margin"><label>教室<input class="input-text" type="text" name="kyousitu" value="{{schedule.kyousitu}}" required placeholder="教室"></label></div>
+        <input type="hidden" name="week" value="{{ schedule.week }}">
+        <input type="hidden" name="class_num" value="{{ schedule.class_num }}">
+        <input type="hidden" name="is_recorded" value="True">
+
+        <div class="common_buttons">
+            <button type="submit" name="reset" value="false" class="common_button">保存</button>
+            
+            {% if schedule.is_recorded %}
+                <button type="submit" name="reset" value="True" class="common_button">削除</button>
+            {% endif %}
+            <button onclick="javascript:window.history.back(-1);return false;" class="common_button">戻る</button>
+            {% if schedule.is_recorded %}
+                <a href="{{ url_for('schedule.add_task',schedule_id=schedule.id) }}" class="common_button">タスク追加</a>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
+    
+</body>
+</html>

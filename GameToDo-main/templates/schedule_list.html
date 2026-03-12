@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %}
+時間割
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='schedule-style.css') }}">
+{% endblock %}
+
+{% block body %}
+	<h1>時間割画面</h1>
+	<table>
+		<caption>
+			時間割
+		</caption>
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col">月</th>
+				<th scope="col">火</th>
+				<th scope="col">水</th>
+				<th scope="col">木</th>
+				<th scope="col">金</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 月曜から金曜の一限 -> 月曜から金曜の二限 -> ...のように回す -->
+			{% for schedule in items %}
+
+			<!-- 月曜の時だけ 新たな行を作成 & 先に何限か表示させる -->
+			{% if schedule.week == 0 %}
+			<tr>
+				<th>{{schedule.class_num +1}}</th>
+				{% endif %}
+
+				<!-- 授業がすでに登録されている時は科目名と教室を表示する、そうでない時は科目名(未登録)と表示する -->
+				{% if schedule.is_recorded %}
+				<td>
+					<a href="{{ url_for('schedule.edit', schedule_id=schedule.id) }}" class="schedule_button has_schedule">
+						<div class="kamoku">{{ schedule.kamoku }}</div>
+						<div class="kyousitu">{{ schedule.kyousitu }}</div>
+					</a>
+				</td>
+				{% else %}
+				<td>
+					<a href="{{ url_for('schedule.edit', schedule_id=schedule.id) }}" class="schedule_button no_schedule">
+						{{ schedule.kamoku }}
+					</a>
+				</td>
+				{% endif %}
+
+				<!-- 金曜の時だけ行を閉じる -->
+				{% if schedule.week == 4 %}
+			</tr>
+			{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
+	<form method="POST" action="{{ url_for('schedule.list') }}">
+		<input type="hidden" id="reset" name="reset">
+		<button id="reset-button" type="submit" class="common_button" onclick="confirmReset()">時間割をリセットする</button>
+	</form>
+	<script>
+		function confirmReset() {
+			if (confirm("本当にリセットしますか？") == true) {
+				document.getElementById("reset").value = "True";
+			}
+			else {
+				document.getElementById("reset").value = "False";
+				return 0;
+			}
+		}
+	</script>
+{% endblock %}

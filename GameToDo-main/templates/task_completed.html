@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block body %}
+    <h1>{{ title }}</h1>
+    <ul class="task_ul">
+      <li><a href="{{ url_for('task.list') }}" class="common_button">タスク一覧</a></li>
+    </ul>
+    <section id="task_table">
+        <div class="task_head task_row">
+                <div class="task_item">タスク名</div>
+                <div class="task_item">難易度</div>
+                <div class="task_item">期限</div>
+        </div>
+        <!-- 以下のコードは後で表示 -->
+        {% for task in items %}
+        <div class="task task_row" data-limit="{{ task.limit }}">
+            <!-- 以下のコードは後で表示 -->
+            <div class="task_item1">{{ task.name }}</div>
+            <div class="task_item2">{{ task.difficulty }}</div>
+            <div class="task_item3">{{ task.limit }}</div>
+            <div class="task_item4">
+              <form action="{{ url_for('task.delete_task', task_id=task.id) }}" method="POST">
+                <button type="submit" class="task_list_button">削除</button>
+              </form>
+            </div>
+        </div>
+        <!--  以下のコードはあとで表示　-->
+        {% endfor %}
+    </section>
+{% endblock %}

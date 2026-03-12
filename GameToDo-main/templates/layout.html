@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>GameToDo - {% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
+	{% block head %}{% endblock%}
+</head>
+<body>
+	<header>
+		<nav class="header-inner">
+			<h1><a href="{{ url_for('home') }}">GameToDo</a></h1>
+			<ul>
+				<li><a href="{{ url_for('home') }}">ホーム</a></li>
+				<li><a href="{{ url_for('schedule.list') }}">時間割</a></li>
+				<li><a href="{{ url_for('task.list') }}">タスク一覧</a></li>
+				<li><a href="{{ url_for('profile.index') }}">プロフィール</a></li>
+			</ul>
+		</nav>
+	</header>
+	{% block body %}{% endblock %}
+</body>
+  

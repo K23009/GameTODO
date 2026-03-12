@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}
+タスク一覧
+{% endblock %}
+{% block head %}
+<script src="{{ url_for('static', filename='task.js') }}"></script>
+{% endblock %}
+{% block body %}
+    <h1>{{ title }}</h1>
+    <ul class="task_ul">
+        <li><a href="{{ url_for('task.add') }}" class="common_button">タスクを追加</a></li>
+        <li><a href="{{ url_for('task.completed') }}" class="common_button">完了したタスク</a></li>
+    </ul>
+
+    <section id="task_table">
+        <div class="task_head task_row">
+                <div class="task_item">タスク名</div>
+                <div class="task_item">難易度</div>
+                <div class="task_item">期限</div>
+                <div class="task_item">&nbsp;</div>
+        </div>
+        <!-- 以下のコードは後で表示 -->
+        {% for task in items|sort (attribute='difficulty', reverse=True)%}
+        <a href="{{ url_for('task.edit', task_id=task.id) }}" class="task task_row" data-limit="{{ task.limit }}">
+            <!-- 以下のコードは後で表示 -->
+            <div class="task_item1">{{ task.name }}</div>
+            <div class="task_item2">{{ task.difficulty }}</div>
+            <div class="task_item3">{{ task.limit }}</div>
+            <div class="task_item4">
+                <form action="{{ url_for('task.complete', task_id=task.id) }}" method="POST">
+                    <button type="submit" class="task_list_button">完了</button>
+                </form>
+            </div>
+        </a>
+        <!--  以下のコードはあとで表示　-->
+        {% endfor %}
+    </section>
+{% endblock %}

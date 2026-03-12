@@ -1,0 +1,594 @@
+:root {
+  font-size: 16pt;
+}
+
+body {
+  font-family: Helvetica, Arial, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "メイリオ", "Meiryo","ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  margin: 2rem;
+}
+
+header {
+  text-decoration: none;
+  margin: -2rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  border-bottom: solid 1px black;
+  border-left: solid 20px rgb(0, 0, 0);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+a {
+  color: #03f;
+  text-decoration: none;
+}
+
+header a {
+  text-decoration: none;
+  color: black;
+}
+
+header a:hover{
+  opacity: 0.6;
+}
+
+header ul {
+  text-decoration: none;
+  margin-left: auto;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+header ul li {
+  margin-left: 20px;
+  text-align: center;
+}
+
+.header-inner {
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+	width: 100%;
+	padding: 0.2rem 0.5rem;
+	font-size: 1rem;
+	box-sizing: border-box;
+}
+
+select {
+  min-width: 4rem;
+  font-size: 1rem;
+  margin: 0.5rem 0.1rem;
+}
+
+button {
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.common_button {
+  display: block;
+  min-width: 5rem;
+  max-width: 12rem;
+  padding: 1rem;
+  margin: 0;
+  margin-top: 1rem;
+  background-color: #333;
+  color: #FFF;
+  font-size: 1rem;
+  font-weight: medium;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.4s ease;
+}
+
+.common_button:hover {
+  opacity: 0.8;
+}
+
+.common_buttons{
+  display: flex;
+}
+
+.common_button:not(:first-child){
+  margin-left: 1rem;
+}
+
+.common_button_solo {
+  display: block;
+  max-width: 12rem;
+  min-width: 5rem;
+  padding: 1rem;
+  margin: 0;
+  margin-top: 1rem;
+  background-color: #333;
+  color: #FFF;
+  font-size: 1rem;
+  font-weight: medium;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+.margin {
+	margin: 1rem auto;
+}
+
+.due-soon {
+  background-color: #ffff99;
+}
+
+.due-past {
+  background-color: #ff9999;
+}
+
+.task_ul {
+  list-style: none;
+  display: flex;
+  column-gap: 1rem;
+  padding-left: 0;
+}
+
+.task {
+  border-radius: 5px;
+}
+
+.task_head {
+  border-bottom: #ddd solid 2px;
+}
+
+#task_table {
+  display: grid;
+  row-gap: 0.2rem;
+  column-gap: 20px;
+  grid-template-columns: 6fr 1fr 6fr 1fr;
+}
+
+.task_row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 4;
+  text-decoration: none;
+  color: #333;
+  border: #ddd solid 1px;
+}
+
+.task_head {
+  padding: 1rem;
+}
+
+.task_item1 {
+  text-align: start;
+  padding: 1rem;
+}
+
+.task_item2 {
+  text-align: center;
+  padding: 1rem;
+}
+
+.task_item3 {
+  text-align: start;
+  padding: 1rem;
+}
+
+.task_item4 {
+  text-align: center;
+  position: relative;
+}
+
+.task_list_button {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0 2px 2px 0;
+  border: none;
+  font-size: 0.8rem;
+  border-left: #ddd solid 1px;
+  background-color: #ddd;
+}
+
+.task_list_button:hover {
+  background-color: #bbb;
+}
+
+#shop_display {
+  display: grid;
+  gap: 10px;
+}
+
+#shop_display > details {
+  margin-bottom: 1rem;
+}
+
+summary {
+  margin-bottom: 0.5rem;
+}
+
+#shop_display_regular, #shop_display_join {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 230px);
+  gap: 15px;
+  place-content: center;
+}
+
+.shop_goods {
+  text-align: center;
+  background-color: #fff;
+  border: #ddd solid 2px;
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+  user-select: none;
+}
+
+.shop_goods:hover {
+  opacity: 0.8;
+}
+
+.shop_goods_title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.shop_buy_button {
+  width: 100%;
+  padding: auto;
+  display: block;
+  border-radius: 0 0 3px 3px;
+  background-color: #ff9999;
+}
+
+.shop_sold {
+  background-color: #ddd;
+  color: #6e6e6e;
+}
+
+.shop_sold:hover {
+  opacity: 1.0;
+  cursor: default;
+}
+
+.shop_sold .shop_buy_button {
+  background-color: #aaaaaa;
+  color: #fff;
+}
+
+summary {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open]>summary::after {
+  content: "▼";
+}
+details>summary::after {
+  content: "▲";
+  margin-left: 4px;
+}
+
+.has_title_list {
+  border: #333 solid 2px;
+  max-height: 300px;
+  height: 300px;
+  overflow-y: scroll;
+  scrollbar-color: #FAF8D8 #DE94BF;
+  scrollbar-width: thin;
+  padding-left: 0px;
+}
+
+.has_title_list:hover {
+  scrollbar-color: #5749d2;
+}
+
+@supports not (scrollbar-width: thin) {
+
+  .has_title_list::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  .has_title_list::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+
+  .has_title_list::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    border-radius: 100px;
+    background-color: #8070d4;
+    background-clip: content-box;
+  }
+}
+
+.has_title_child {
+  padding: 0.5rem;
+  list-style: none;
+  border-radius: 5px;
+  margin: 0.2rem;
+}
+
+.has_title_child:nth-child(odd) {
+  border: dashed 1px black;
+}
+
+.has_title_child:nth-child(even) {
+  background-color: #ddd;
+}
+
+canvas {
+  border: 1px solid black;
+  width: 80%;
+  max-width: 700px;
+  border-radius: 10px;
+  aspect-ratio: 627 / 379 ;
+}
+
+.my_card_display {
+  display: flex;
+}
+
+.my_card_edit {
+  min-width: 5em;
+  margin-left: 1rem;
+  align-self: flex-end;
+  display: grid;
+  width: 100%;
+}
+
+.user_name_input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.user_name_input>label {
+  min-width: 6rem;
+}
+
+.my_card_edit_color {
+  min-width: 5em;
+  width: 100px;
+}
+
+.my_card_edit input {
+  height: 2rem;
+}
+
+.my_card_buttons {
+  display: flex;
+}
+
+.my_card_buttons > a, button {
+  margin-left: 1rem;
+}
+
+@media screen and (max-width: 1052px) {
+	/* 1052px以下に適用されるCSS */
+  canvas {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .my_card_display {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .my_card_edit {
+    width: 90%;
+  }
+  
+  .my_card_edit_color {
+    min-width: 6em;
+    display: flex;
+    margin-right: 1rem;
+  }
+  .my_card_edit_color > * {
+    min-width: 6em;
+    display: block;
+  }
+  
+  .my_card_edit input {
+    height: 2rem;
+  }
+}
+
+.other_card {
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 4;
+  text-decoration: none;
+  color: #333;
+  border: #ddd solid 1px;
+  padding: 1.5rem;
+}
+
+#other_cards_list {
+  display: grid;
+  row-gap: 0.2rem;
+  column-gap: 20px;
+  grid-template-columns: 2fr 1fr 2fr 10fr;
+}
+
+.other_card_title {
+  text-align: start;
+  padding: 1rem;
+}
+
+.other_card_name {
+  margin-left: 1rem;
+  text-align: start;
+  padding: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#notify {
+  background-color: #fff;
+  border-radius: 5px;
+  border: #333 solid 1px;
+  text-align: center;
+  width: 12rem;
+  height: 3rem;
+
+  transition: opacity 2s ease-in, transform 3s ease;
+  position: fixed;
+  top: 10%;
+  left: 60%;
+  z-index: 10;
+}
+
+#notify a {
+  color: #333;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+#achievement_list {
+  display: grid;
+  row-gap: 0.2rem;
+  column-gap: 20px;
+  grid-template-columns: [column-1] 4fr [column-2] 2fr [column-3] 3fr [column-4] 1fr;
+}
+
+#achievement_list > .achievement {
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: stretch;
+  color: #333;
+  border: #ddd solid 1px;
+
+  grid-column: span 4;
+  display: grid;
+  grid-template-columns: subgrid; /* 20ch 1fr */
+}
+
+.achievement_terms {
+  font-weight: bold;
+  text-align: start;
+  padding: 1rem;
+  grid-column: 1;
+}
+
+.achievement_progress {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-align: center;
+  padding: 1rem;
+  grid-column: 2;
+}
+
+.achievement_reward {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-align: start;
+  padding: 1rem;
+  grid-column: 3;
+}
+
+.achievement_button_wrapper {
+  padding: 1rem 2rem;
+  text-align: center;
+  position: relative;
+  grid-column: 4;
+}
+
+.achievement_button {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  font-size: 0.7rem;
+  border-left: #ddd solid 1px;
+  background-color: #ddd;
+
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.received{
+  background-color: #ddd;
+  color: #6e6e6e;
+}
+
+.received:hover {
+  opacity: 1.0;
+  cursor: default;
+}
+
+.received_button{
+  color: #6e6e6e;
+  font-size: 0.7rem;
+
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  font-size: 0.7rem;
+  border-left: #ddd solid 1px;
+  background-color: #ddd;
+
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.completed {
+  background-color: #ffcc63;
+  cursor: pointer;
+}
+
+.completed .achievement_button {
+  background-color: #ffcc63;
+  border: none;
+}
+
+.completed:hover {
+  opacity: 0.8;
+}
+
+.expired {
+	color: #ff0000;
+  font-weight: bold;
+}
+
+.lined_margin {
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: solid 5px #bbb;
+}

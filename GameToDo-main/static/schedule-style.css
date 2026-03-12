@@ -1,0 +1,79 @@
+.schedule_button{
+    padding: 1.3em 0;
+    text-decoration: none;
+    text-align: center;
+	font-size: clamp(0.5em, 2vw, 1.0em);
+	background: #ccc;
+	display: block;
+
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+	max-width: 20vw;
+	height: clamp(80px, 8vh, 200px);
+}
+
+.schedule_button div {
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 0;
+	text-wrap: wrap;
+	overflow-y: hidden;
+}
+
+.no_schedule{
+	background-color: #f4f4f4;
+	color: #aaaaaa;
+}
+
+.no_schedule:active, .no_schedule:hover {
+	background-color: #d5d5d5;
+	color: #1f1f1f;
+}
+
+.has_schedule:active {
+	opacity: 0.8;
+}
+
+a:hover {
+	opacity: 0.8;
+}
+
+.has_schedule{
+	background-color: #ffcc63;
+	color: #332914;
+}
+
+.kamoku{
+	font-weight: bolder;
+}
+
+.kyousitu{
+	opacity: 0.8;
+	margin-top: 1.0rem;
+}
+
+table {
+	text-align: center;
+	table-layout: fixed;
+	border: solid 1px black;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table th {
+	padding: 10px;
+	background: #f0f0f0;
+	border: solid 1px black;
+}
+  
+table td {
+	padding: 1px;
+	border: solid 1px black;
+}
+
+#reset-button {
+	margin-left: auto;
+	margin-top: 1rem;
+}

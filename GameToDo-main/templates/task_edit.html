@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}
+タスク編集
+{% endblock %}
+{% block body %}
+    <h1>タスクを編集</h1>
+
+    <form action="{{ url_for('task.edit', task_id=task.id) }}" method="post">
+        <label> タスク名: <input type="text" id= "name"name="name" value="{{task.name}}" placeholder="課題名を入力"></label><br>
+        <label> 難易度: 
+            <select id="difficulty" name="difficulty" required>
+                <option value="1"{% if task.difficulty == 1 %} selected {% endif %}>1 (簡単)</option>
+                <option value="2"{% if task.difficulty == 2 %}selected {% endif %}>2</option>
+                <option value="3"{% if task.difficulty == 3 %} selected {% endif %}>3</option>
+                <option value="4"{% if task.difficulty == 4 %} selected {% endif %}>4</option>
+                <option value="5"{% if task.difficulty == 5 %} selected {% endif %}>5 (難しい)</option>
+            </select>
+        </label>
+        <br>
+        <label> 期限: <input type="date" id="limit" name="limit" value="{{task.limit}}"></label><br>
+        <button type="submit" class="common_button">保存</button>
+    </form>
+{% endblock %}

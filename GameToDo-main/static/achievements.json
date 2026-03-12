@@ -1,0 +1,29 @@
+[
+  {"id" : 0, "type" : "welcome", "content" : "GameToDoへようこそ！", "count": 0, "reward": 1003},
+  {"id" : 1, "type" : "task", "count": 10, "reward": 1011},
+  {"id" : 2, "type" : "task", "count": 20, "reward": 1012},
+  {"id" : 3, "type" : "task", "count": 30, "reward": 1013},
+  {"id" : 4, "type" : "task", "count": 40, "reward": 1014},
+  {"id" : 5, "type" : "task", "count": 50, "reward": 1015},
+  {"id" : 6, "type" : "task", "count": 75, "reward": 1016},
+  {"id" : 7, "type" : "task", "count": 100, "reward": 1017},
+
+  {"id" : 21, "type" : "title", "count": 10, "reward": 1031},
+  {"id" : 22, "type" : "title", "count": 20, "reward": 1032},
+  {"id" : 23, "type" : "title", "count": 30, "reward": 1033},
+  {"id" : 24, "type" : "title", "count": 40, "reward": 1034},
+  {"id" : 25, "type" : "title", "count": 50, "reward": 1035},
+  {"id" : 26, "type" : "title", "count": 75, "reward": 1036},
+  {"id" : 27, "type" : "title", "count": 100, "reward": 1037},
+  
+  {"id" : 41, "type" : "point", "count": 500, "reward": 1051},
+  {"id" : 42, "type" : "point", "count": 1000, "reward": 1052},
+  {"id" : 43, "type" : "point", "count": 2500, "reward": 1053},
+  {"id" : 44, "type" : "point", "count": 5000, "reward": 1054},
+  {"id" : 45, "type" : "point", "count": 7500, "reward": 1055},
+  {"id" : 46, "type" : "point", "count": 10000, "reward": 1056},
+  {"id" : 47, "type" : "point", "count": 30000, "reward": 1057},
+  {"id" : 48, "type" : "point", "count": 50000, "reward": 1058},
+  {"id" : 49, "type" : "point", "count": 75000, "reward": 1059},
+  {"id" : 50, "type" : "point", "count": 100000, "reward": 1060}
+]

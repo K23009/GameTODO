@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}
+プロフィール
+{% endblock %}
+
+{% block body %}
+    <h1>プロフィール</h1>
+	<main>
+        <h2>ユーザー情報</h2>
+        <div class="lined_margin">ユーザー名: {{ user }}</div>
+        <h2>現在の所持ポイント</h2>
+        <div class="lined_margin">{{ point }}ポイント</div>
+		<ul>
+			<li><a href="{{ url_for('profile.mycard') }}">自分のカード</a></li>
+			<li><a href="{{ url_for('profile.achievement') }}">実績</a></li>
+			<li><a href="{{ url_for('profile.shop') }}">ショップ</a></li>
+		</ul>
+    </main> 
+{% endblock %}

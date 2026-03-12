@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% block title %}
+交換したカード
+{% endblock %}
+
+{% block body %}
+    <h1>実績</h1>
+    <!-- <button type="submit">一括受け取り</button> -->
+    <section id="achievement_list">
+        {% for item in items %}
+            {% if item.received == True %}<!-- 受け取り済み -->
+                <a class="achievement received" data-id="{{ item.id }}" data-type="{{ item.type }}">
+            {% else %}
+                <a class="achievement" onclick="receive(event)" data-id="{{ item.id }}" data-count="{{ item.count }}" data-type="{{ item.type }}">
+            {% endif %}
+                {% if item.type == "task" %}
+                    <div class="achievement_terms">タスクを{{ item.count }}回完了する</div>
+                    <div class="achievement_progress">{{ cur_counts.task }} / {{ item.count }}</div>
+                {% elif item.type == "title" %}
+                    <div class="achievement_terms">称号を{{ item.count }}個手に入れる</div>
+                    <div class="achievement_progress">{{ cur_counts.title }} / {{ item.count }}</div>
+                {% elif item.type == "point" %}
+                    <div class="achievement_terms">ポイントを合計で{{ item.count }}手に入れる</div>
+                    <div class="achievement_progress">{{ cur_counts.total_point}} / {{ item.count }}</div>
+                {% else %}
+                    <div class="achievement_terms">{{ item.content }}</div>
+                {% endif %}
+                <div class="achievement_reward">報酬称号：{{ item.reward_content}}</div>
+                <div class="achievement_button_wrapper">
+                {% if item.received == True %}<!-- 受け取り済み -->
+                    <div class="received_button">受領済み</div>
+                {% else %}
+                    <div class="achievement_button">挑戦中</div>
+                {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+    </section>
+    <script>
+        let js_items = {{ items | tojson }};
+        let user_ac_count = {{ cur_counts | tojson }};
+        let count = 0;
+
+        function startUp(){
+            let achievement_list = document.getElementById("achievement_list");
+            //console.log(achievement_list.getElementsByClassName("achievement"));
+            for (let e of achievement_list.getElementsByClassName("achievement")){
+                if (e.hasAttribute("data-count")){
+                    console.log(e.dataset['count']);
+                    let data_id = e.dataset['id'];
+                    let data_count = e.dataset['count'];
+                    let type = e.dataset['type'];
+                    if (type == "task") {
+                        count = user_ac_count.task;
+                    }
+                    else if (type == "title") {
+                        count = user_ac_count.title;
+                    }
+                    else if (type == "point") {
+                        count = user_ac_count.total_point;
+                    }
+                    if (count >= parseInt(data_count)) {
+                        e.classList.add("completed");
+                        e.getElementsByClassName('achievement_button')[0].innerHTML = "受領する";
+                    }
+                }
+            }
+        }
+
+        function receive(event) {
+            const target = event.currentTarget;
+
+            if (target.classList.contains('completed')) {
+                //alert("称号獲得！");
+
+                target.classList.remove("completed");
+                target.classList.add("received");
+                target.getElementsByClassName('achievement_button')[0].classList.add("received_button");
+                target.getElementsByClassName('achievement_button')[0].innerHTML = "受領済み";
+                target.getElementsByClassName('achievement_button')[0].classList.remove("achievement_button");
+
+                let request = new XMLHttpRequest();
+                request.open('POST', 'received_achievement');
+                request.setRequestHeader('content-type', 'application/json');
+                request.send(parseInt(target.dataset['id']));
+                //buy_target.removeAttribute("onclick");
+            }
+        }
+
+        window.addEventListener("load", startUp, false);
+    </script>
+{% endblock %}
